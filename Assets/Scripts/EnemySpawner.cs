@@ -8,16 +8,9 @@ public class EnemySpawner : MonoBehaviour
     public int postion_x;
     public int postion_z;
     public int enemyCount;
-    public int xRange1;
-    public int xRange2;
-    public int zRange1;
-    public int zRange2;
     public List<GameObject> enemyList;
     public int maxEnemies;
-
-private void Start() 
-{
-}
+    public int distance;
 
 
 private void Update() 
@@ -33,13 +26,18 @@ IEnumerator EnemySpawn()
     while(enemyCount < maxEnemies)
 {
 
-    postion_x = Random.Range(xRange1,xRange2);
-    postion_z = Random.Range(zRange1,zRange2);
 
-    GameObject enemy = Instantiate(enemyPrefab, new Vector3(postion_x, 1, postion_z), Quaternion.identity);
-    enemyList.Add(enemy);
-    yield return new WaitForSeconds(0.5f);
-    enemyCount +=1;
+
+int i = Random.Range(0,1);
+    
+postion_x = RandomBool(distance);
+postion_z = Random.Range(-distance,distance);
+
+
+GameObject enemy = Instantiate(enemyPrefab, new Vector3(postion_x, 1, postion_z), Quaternion.identity);
+enemyList.Add(enemy);
+yield return new WaitForSeconds(0.8f);
+enemyCount +=1;
 
 }
 }
@@ -56,4 +54,22 @@ IEnumerator EnemySpawn()
     StartCoroutine(EnemySpawn());    
 
    }
+
+   int RandomBool(int val)
+   {
+
+    int test;
+
+    if (Random.value > 0.5f)
+    {
+        test = val;
+    }
+    else
+    {
+        test = -val;
+    }
+
+    return test;
+   }
 }
+
