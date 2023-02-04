@@ -8,53 +8,66 @@ public class Enemy : MonoBehaviour
     public float health;
     private float maxHealth = 100;
     public float speed;
-    public float damage;
+    public int damage;
 
     public Transform target;
     public float chaseRadius;
 
 
-private void Start() 
-{
-    target = GameObject.FindGameObjectWithTag("Player").transform;
-    health = maxHealth;
-}
+    private void Start() 
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        health = maxHealth;
+    }
 
-void Update()
-{
-CheckDistance();
+    void Update()
+    {
+        CheckDistance();
 
-if(Input.GetKeyDown(KeyCode.L))
-       {
-         TakeDamage(50);
-       }
-
-       if(health <= 0)
-      {
-        OnDeath();
-      }
-}
-
-
-void CheckDistance()
-   {  
-     if(Vector3.Distance(target.position, transform.position) <= chaseRadius)
-     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed *  Time.deltaTime);
-     }
-   }
-
-void TakeDamage(int damage)
-   {
-    health -= damage;     
-   }
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            TakeDamage(50);
+        }
+        if(health <= 0)
+        {
+            OnDeath();
+        }
+    }
 
 
-void OnDeath() 
-{
-  Destroy(gameObject);
-  Debug.Log("Is Dead");
-}
+    void CheckDistance()
+    {  
+        if(Vector3.Distance(target.position, transform.position) <= chaseRadius)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed *  Time.deltaTime);
+        }
+    }
+
+    void TakeDamage(int damage)
+    {
+        health -= damage;     
+    }
+
+
+    void OnDeath() 
+    {
+        Destroy(gameObject);
+        Debug.Log("Is Dead");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PrincipalRoot"))
+        {
+            TakeDamage(100);
+        }
+
+        if (other.gameObject.CompareTag("Tree"))
+        {
+            other.gameObject.GetComponent<Tree>().TakeDamage(damage);
+            TakeDamage(100);
+        }
+    }
 
 }
 

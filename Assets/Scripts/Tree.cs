@@ -15,6 +15,7 @@ public class Tree : MonoBehaviour
 
 
     [Header("Attributes")]
+    [SerializeField] private int treeLife;
     [SerializeField] private float velocidadCrecimiento; 
     [SerializeField] private float heightToActtack;
     [SerializeField] private float timeToRoot;
@@ -29,12 +30,16 @@ public class Tree : MonoBehaviour
     {
         attacking = false;
         rootTime = 0;
+        treeLife = 100;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(treeLife <= 0)
+        {
+            Time.timeScale = 0;
+        }
         Vector3 screenPos = Input.mousePosition;
         Ray ray = Camera.main.ScreenPointToRay(screenPos);
         if (Input.GetMouseButtonDown(0))
@@ -42,6 +47,7 @@ public class Tree : MonoBehaviour
             principalRoot.transform.position = Vector3.zero;
             rootTime = 0;
             ClearRoots();
+            principalRoot.GetComponent<Collider>().enabled = false;
         }
         if (Input.GetMouseButton(0))
         {
@@ -59,6 +65,7 @@ public class Tree : MonoBehaviour
             principalRoot.transform.Translate(Vector3.zero, Space.Self);
             Vector3 dirtoAttack = new Vector3(principalRoot.transform.position.x, principalRoot.transform.position.y + heightToActtack, principalRoot.transform.position.z);
             principalRoot.transform.position = dirtoAttack;
+            principalRoot.GetComponent<Collider>().enabled = true;
         }
 
         if (attacking)
@@ -87,5 +94,10 @@ public class Tree : MonoBehaviour
             Destroy(root);
         }
         rootsList.Clear();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        treeLife -= damage;
     }
 }
