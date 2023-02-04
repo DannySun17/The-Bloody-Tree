@@ -13,63 +13,54 @@ public class EnemySpawner : MonoBehaviour
     public int distance;
 
 
-private void Update() 
-{
-    if(Input.GetKeyDown(KeyCode.K))
+    private void Update() 
     {
-        ClearEnemy();
-    }
-}
-
-IEnumerator EnemySpawn()
-{
-    while(enemyCount < maxEnemies)
-{
-
-
-
-int i = Random.Range(0,1);
-    
-postion_x = RandomBool(distance);
-postion_z = Random.Range(-distance,distance);
-
-
-GameObject enemy = Instantiate(enemyPrefab, new Vector3(postion_x, 1, postion_z), Quaternion.identity);
-enemyList.Add(enemy);
-yield return new WaitForSeconds(0.8f);
-enemyCount +=1;
-
-}
-}
-
-   void ClearEnemy()
-   {
-    foreach(GameObject enemy in enemyList)
-    {
-        Destroy(enemy);
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            ClearEnemy();
+        }
     }
 
-    enemyList.Clear();
-    enemyCount =0;
-    StartCoroutine(EnemySpawn());    
-
-   }
-
-   int RandomBool(int val)
-   {
-
-    int test;
-
-    if (Random.value > 0.5f)
+    IEnumerator EnemySpawn()
     {
-        test = val;
-    }
-    else
-    {
-        test = -val;
+        while(enemyCount < maxEnemies)
+        {
+            int i = Random.Range(0,1);
+            postion_x = RandomBool(distance);
+            postion_z = Random.Range(-distance,distance);
+            GameObject enemy = Instantiate(enemyPrefab, new Vector3(postion_x, 1, postion_z), Quaternion.identity);
+            enemyList.Add(enemy);
+            yield return new WaitForSeconds(0.8f);
+            enemyCount +=1;
+
+        }
     }
 
-    return test;
-   }
+    void ClearEnemy()
+    {
+        foreach(GameObject enemy in enemyList)
+        {
+            Destroy(enemy);
+        }
+        enemyList.Clear();
+        enemyCount = 0;
+        StartCoroutine(EnemySpawn());    
+    }
+
+    int RandomBool(int val)
+    {
+        int test;
+
+        if (Random.value > 0.5f)
+        {
+            test = val;
+        }
+        else
+        {
+            test = -val;
+        }
+
+        return test;
+    }               
 }
 

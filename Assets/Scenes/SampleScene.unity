@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 577224469}
   m_Layer: 0
   m_Name: PrincipalRoot
-  m_TagString: Untagged
+  m_TagString: PrincipalRoot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -293,12 +293,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577224467}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 3
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &577224470
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 710417266}
   m_Layer: 0
   m_Name: Tree
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -471,7 +471,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710417261}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -558,9 +558,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   objectActack: {fileID: 145459301}
-  PrincipalRoot: {fileID: 577224467}
-  VelocidadCrecimiento: 0.1
-  HeightToActtack: 1000
+  principalRoot: {fileID: 577224467}
+  prefabRoot: {fileID: 3208329066753873480, guid: bc90aacc0fed886439341bc0a8fe6fe9, type: 3}
+  rootsList: []
+  treeLife: 0
+  velocidadCrecimiento: 0.2
+  heightToActtack: 1
+  timeToRoot: 0.1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,15 +713,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1416973185522227894, guid: f0ea20909d95fab4493c5f4fe882256a, type: 3}
-  postion_x: 0
-  postion_z: 0
-  enemyCount: 0
-  xRange1: -25
-  xRange2: 25
-  zRange1: -25
-  zRange2: 25
+  postion_x: 25
+  postion_z: 25
+  enemyCount: 15
   enemyList: []
   maxEnemies: 25
+  distance: 30
 --- !u!4 &1390185286
 Transform:
   m_ObjectHideFlags: 0
