@@ -21,7 +21,7 @@ StartCoroutine(EnemySpawn());
     {
         postion_x = Random.Range(1,50);
         postion_z = Random.Range(1,30);
-        Instantiate(enemy, new Vector3(postion_x, 2, postion_z), Quaternion.identity);
+        Instantiate(enemy, new Vector3(postion_x, 1, postion_z), Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
         enemyCount +=1;
 
