@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     private float maxHealth = 100;
     public float speed;
     public int damage;
+    
+    public GameObject energyPrefab;
 
     public Transform target;
     public float chaseRadius;
@@ -53,6 +55,9 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
         Debug.Log("Is Dead");
+        
+        GameObject energy = Instantiate(energyPrefab, transform.position, Quaternion.identity) as GameObject;
+
     }
 
     private void OnTriggerEnter(Collider other)
