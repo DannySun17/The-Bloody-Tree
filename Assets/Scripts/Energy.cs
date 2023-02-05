@@ -39,6 +39,7 @@ public class Energy : MonoBehaviour
 
 
 
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Principal Root")
@@ -47,7 +48,8 @@ public class Energy : MonoBehaviour
 
             energyText.text = "Energy: " + energy.ToString();
 
-            DestroyImmediate(this.gameObject);
+            Destroy(gameObject);
+            Debug.Log("Energy Consumed");
 
         }
     }
